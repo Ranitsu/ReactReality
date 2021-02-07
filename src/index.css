@@ -14,9 +14,21 @@
 
 .list-item:hover {
     background-color: lightcyan;
+    scale: 1.05;
+}
+
+.list-item-content {
+    position: relative;
+    display: inline;
+}
+
+.list-item-icon {
+    position: relative;
+    float: right;
 }
 
 .item-input {
+    position: relative;
     margin: 5px;
     padding: 5px;
     width: calc(100% - 20px);
@@ -30,10 +42,15 @@
 }
 
 .checkCircle {
-    float: right;
     color: black;
+    scale: 1.25;
 }
 
 .checkCircle:hover {
+    color: green;
+    scale: 1.50;
+}
+
+.finished {
     color: green;
 }

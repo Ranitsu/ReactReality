@@ -6,6 +6,15 @@ import { faCheckCircle as sCheckCircle } from '@fortawesome/free-solid-svg-icons
 
 import './index.css';
 
+
+
+class ItemList {
+    constructor(content, isFinished) {
+        this.content = content;
+        this.isFinished = isFinished;
+    }
+}
+
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
@@ -13,14 +22,14 @@ class TodoList extends React.Component {
             items: Array(2),
         };
 
-        this.state.items[0] = "Test 1";
-        this.state.items[1] = "Test 2";
+        this.state.items[0] = new ItemList("Test 1", false);
+        this.state.items[1] = new ItemList("Test 2", true);
     }
 
     pressEnter = (e) => {
         if (e.key === 'Enter') {
             const items = this.state.items.slice(0, this.state.items.length);
-            items.push(e.target.value);
+            items.push(new ItemList(e.target.value, false));
             this.setState({
                 items: items,
             });     
@@ -29,15 +38,30 @@ class TodoList extends React.Component {
         }
     }
 
-    render() {   
-        const ele = <FontAwesomeIcon icon={rCheckCircle}/>
-        const element = <FontAwesomeIcon icon={sCheckCircle} className="checkCircle" />
-        const items = this.state.items.map((item, index) => {
+    changeTaskStatus(index) {
+        const items = this.state.items.slice();
+        items[index].isFinished = !items[index].isFinished;
+        this.setState({
+            items: items,
+        });   
+    }
+
+    getIcon(item) {
+        if (item.isFinished) {
+            return <FontAwesomeIcon icon={sCheckCircle} className="checkCircle finished" />
+        } else {
+            return <FontAwesomeIcon icon={rCheckCircle} className="checkCircle" />
+        }
+    }
+
+    render() {
+        const items = this.state.items.map((item, index) => {            
             return (
-                <div className="list-item">
-                    {item}
-                    {ele}
-                    {element}
+                <div key={item.content} className="list-item">
+                    <div className="list-item-content">{item.content}</div>
+                    <div className="list-item-icon" onClick={() => this.changeTaskStatus(index)}>
+                        {this.getIcon(item)}
+                    </div>
                 </div>
             );
         });
