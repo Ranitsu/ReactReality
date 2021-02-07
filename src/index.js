@@ -1,17 +1,62 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle as rCheckCircle } from '@fortawesome/free-regular-svg-icons'
+import { faCheckCircle as sCheckCircle } from '@fortawesome/free-solid-svg-icons'
+
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+class TodoList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: Array(2),
+        };
+
+        this.state.items[0] = "Test 1";
+        this.state.items[1] = "Test 2";
+    }
+
+    pressEnter = (e) => {
+        if (e.key === 'Enter') {
+            const items = this.state.items.slice(0, this.state.items.length);
+            items.push(e.target.value);
+            this.setState({
+                items: items,
+            });     
+            
+            e.target.value = "";
+        }
+    }
+
+    render() {   
+        const ele = <FontAwesomeIcon icon={rCheckCircle}/>
+        const element = <FontAwesomeIcon icon={sCheckCircle} className="checkCircle" />
+        const items = this.state.items.map((item, index) => {
+            return (
+                <div className="list-item">
+                    {item}
+                    {ele}
+                    {element}
+                </div>
+            );
+        });
+
+        const input = (
+            <input type="text" name="newItem" className="item-input" onKeyDown={this.pressEnter}></input>
+        );
+
+        return (
+            <div className="todolist">
+                {items}
+                {input}
+            </div>
+        );
+    }
+}
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    <TodoList/>,
+    document.getElementById('root')
+)

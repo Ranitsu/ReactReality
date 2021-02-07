@@ -1,13 +1,39 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.todolist {
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    background-color: rgb(34, 39, 107);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.list-item {
+    background-color: lightblue;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.list-item:hover {
+    background-color: lightcyan;
+}
+
+.item-input {
+    margin: 5px;
+    padding: 5px;
+    width: calc(100% - 20px);
+    background-color: lightsteelblue;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.item-input:focus {
+    outline: none;
+}
+
+.checkCircle {
+    float: right;
+    color: black;
+}
+
+.checkCircle:hover {
+    color: green;
 }
